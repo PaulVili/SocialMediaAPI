@@ -1,6 +1,7 @@
 package com.paulvili.socialmediaapi.controller;
 
 import com.paulvili.socialmediaapi.exception.ResourceNotFoundException;
+import com.paulvili.socialmediaapi.model.Role;
 import com.paulvili.socialmediaapi.model.UsersModel;
 import com.paulvili.socialmediaapi.repository.UsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +31,7 @@ public class UsersController {
             user.setUserName(users.getUserName());
             user.setEmail(users.getEmail());
             user.setPasswordHash(bCryptPasswordEncoder.encode(users.getPasswordHash()));
+            user.setRole(Role.User);
             user.setRegisteredAt(Date.valueOf(LocalDate.now()));
             usersRepository.save(user);
         }
