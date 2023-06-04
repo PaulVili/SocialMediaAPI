@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.sql.Date;
 import java.time.LocalDate;
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/users")

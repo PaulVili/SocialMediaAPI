@@ -9,6 +9,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
+import java.util.List;
 
 public interface UserFriendRepository extends JpaRepository<UserFriendModel, Integer> {
     @Query("select u from UserFriendModel u where u.sourceId = :sourceId and u.targetId = :targetId")
@@ -23,4 +24,6 @@ public interface UserFriendRepository extends JpaRepository<UserFriendModel, Int
     @Transactional
     @Query("delete UserFriendModel u where u.sourceId = :sourceId and u.targetId = :targetId")
     void deleteBySourceIdAndTargetId(@Param("sourceId") int sourceId, @Param("targetId") int targetId);
+
+
 }
