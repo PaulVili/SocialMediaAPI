@@ -25,8 +25,8 @@ public class UserFriendsController {
     @PostMapping("addFriend")
     public ResponseEntity<UserFriendModel> addFriend(@RequestBody UserFriendModel userFriendModel){
 
-        UsersModel findSourceId = usersRepository.findById(userFriendModel.getSourceId()).orElseThrow(()-> new ResourceNotFoundException(("post not found with this id" + userFriendModel.getSourceId())));
-        UsersModel findTargetId = usersRepository.findById(userFriendModel.getTargetId()).orElseThrow(()-> new ResourceNotFoundException(("post not found with this id" + userFriendModel.getTargetId())));
+        UsersModel findSourceId = usersRepository.findById(userFriendModel.getSourceId()).orElseThrow(()-> new ResourceNotFoundException(("source id not found with this id" + userFriendModel.getSourceId())));
+        UsersModel findTargetId = usersRepository.findById(userFriendModel.getTargetId()).orElseThrow(()-> new ResourceNotFoundException(("target id not found with this id" + userFriendModel.getTargetId())));
 
         UserFriendModel userFriend = new UserFriendModel();
         UserFollowerModel userFollower = new UserFollowerModel();
