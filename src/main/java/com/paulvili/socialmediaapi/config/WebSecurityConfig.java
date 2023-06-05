@@ -48,17 +48,4 @@ public class WebSecurityConfig {
         return (web) -> web.ignoring().requestMatchers("/v3/api-docs/**");
     }
 
-    //Конфиг без проверок
-    /*@Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-
-        http
-                .csrf(csrf -> csrf.disable())
-                .authorizeRequests()
-                .requestMatchers("/api/**")
-                .permitAll();
-        return http.build();
-    }*/
-
-
 }
