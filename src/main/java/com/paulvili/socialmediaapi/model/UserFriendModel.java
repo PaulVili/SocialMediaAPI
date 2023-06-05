@@ -5,7 +5,6 @@ import lombok.Data;
 import org.hibernate.annotations.DynamicUpdate;
 
 import java.sql.Date;
-import java.util.Objects;
 
 @Data
 @Entity

@@ -1,16 +1,18 @@
 package com.paulvili.socialmediaapi.controller;
 
 import com.paulvili.socialmediaapi.exception.ResourceNotFoundException;
-import com.paulvili.socialmediaapi.model.UserFollowerModel;
 import com.paulvili.socialmediaapi.model.UserPostsModel;
+import com.paulvili.socialmediaapi.model.UsersModel;
 import com.paulvili.socialmediaapi.repository.UserFollowerRepository;
-import com.paulvili.socialmediaapi.repository.UserFriendRepository;
 import com.paulvili.socialmediaapi.repository.UsersPostRepository;
+import com.paulvili.socialmediaapi.repository.UsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -20,9 +22,9 @@ public class UsersPostController {
     @Autowired
     private UsersPostRepository usersPostRepository;
     @Autowired
-    private UserFriendRepository userFriendRepository;
-    @Autowired
     private UserFollowerRepository userFollowerRepository;
+    @Autowired
+    private UsersRepository usersRepository;
 
     @GetMapping()
     public List<UserPostsModel> getPosts(){
@@ -39,8 +41,19 @@ public class UsersPostController {
 
     @PostMapping("create")
     public ResponseEntity<UserPostsModel> createNewPost(@RequestBody UserPostsModel usersPost){
-        usersPostRepository.save(usersPost);
-        return new ResponseEntity<>(usersPost, HttpStatus.CREATED);
+        UsersModel findAuthorPost = usersRepository.findByUserId(usersPost.getUserId());
+        UserPostsModel newPost = new UserPostsModel();
+        if (findAuthorPost != null){
+            newPost.setUserId(usersPost.getUserId());
+            newPost.setPostHeader(usersPost.getPostHeader());
+            newPost.setPostText(usersPost.getPostText());
+            newPost.setPostImage(usersPost.getPostImage());
+            newPost.setCreatedAt(Date.valueOf(LocalDate.now()));
+            usersPostRepository.save(newPost);
+        }else{
+            return new ResponseEntity<>(newPost, HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(newPost, HttpStatus.CREATED);
     }
 
     @PutMapping("update/{id}")

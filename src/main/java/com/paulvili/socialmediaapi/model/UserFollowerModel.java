@@ -1,13 +1,10 @@
 package com.paulvili.socialmediaapi.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 import org.hibernate.annotations.DynamicUpdate;
 
 import java.sql.Date;
-import java.util.Objects;
 
 @Data
 @Entity

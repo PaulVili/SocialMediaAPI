@@ -1,6 +1,5 @@
 package com.paulvili.socialmediaapi.controller;
 
-import com.paulvili.socialmediaapi.model.UserFriendModel;
 import com.paulvili.socialmediaapi.model.UserMessageModel;
 import com.paulvili.socialmediaapi.model.UsersModel;
 import com.paulvili.socialmediaapi.repository.UserMessageRepository;
