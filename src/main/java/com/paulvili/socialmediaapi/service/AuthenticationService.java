@@ -38,10 +38,7 @@ public class AuthenticationService {
                 .registeredAt(Date.valueOf(LocalDate.now()))
                 .build();
         repository.save(user);
-        var jwtToken = jwtService.generateToken(user);
-        return AuthenticationResponse.builder()
-                .token(jwtToken)
-                .build();
+        return responseBuilder(user);
     }
 
     public AuthenticationResponse authenticate(AuthenticationRequest request) {
@@ -50,6 +47,10 @@ public class AuthenticationService {
                 request.getPassword()
                 ));
         var user = repository.findByEmail(request.getEmail()).orElseThrow();
+        return responseBuilder(user);
+    }
+
+    private AuthenticationResponse responseBuilder(UsersModel user){
         var jwtToken = jwtService.generateToken(user);
         return AuthenticationResponse.builder()
                 .token(jwtToken)

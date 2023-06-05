@@ -2,7 +2,6 @@ package com.paulvili.socialmediaapi.controller;
 
 import com.paulvili.socialmediaapi.repository.UserFollowerRepository;
 import com.paulvili.socialmediaapi.repository.UserFriendRepository;
-import com.paulvili.socialmediaapi.response.AuthenticationResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
