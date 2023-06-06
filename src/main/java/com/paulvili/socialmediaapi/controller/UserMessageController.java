@@ -49,6 +49,8 @@ public class UserMessageController {
         }
         if (findSourceId.isEmpty() || findTargetId.isEmpty()){
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        } else if (findTargetId.isEmpty() && findSourceId.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         userMessage.setSourceId(sourceId);
         userMessage.setTargetId(targetId);
