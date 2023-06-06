@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.*;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @Tag(name = "Posts", description = "Users posts ")
@@ -38,7 +37,6 @@ public class UsersPostController {
     @GetMapping("lastPosts/{userId}")
     public List<UserPostsModel> getLastPosts(@PathVariable int userId){
         List<Integer> findAllByUserId = userFollowerRepository.findTargetIdBySourceId(userId);
-        findAllByUserId.stream().map(String::valueOf).collect(Collectors.joining(","));
         return usersPostRepository.getUserPostsByUserIdAndSorted(findAllByUserId);
     }
     @Operation(

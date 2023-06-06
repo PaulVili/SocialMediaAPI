@@ -21,7 +21,6 @@ public class UsersModel implements UserDetails {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @NonNull
     @Column(name = "id")
     private int id;
 

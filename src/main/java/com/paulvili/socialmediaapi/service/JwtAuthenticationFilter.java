@@ -1,6 +1,5 @@
 package com.paulvili.socialmediaapi.service;
 
-import com.paulvili.socialmediaapi.service.JwtService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
