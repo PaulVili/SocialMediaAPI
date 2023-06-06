@@ -54,14 +54,17 @@ public class AuthenticationController {
     }
     @Operation(
             summary = "Authentication",
-            description = "Gets a JSON object  with email and password. The response is jwt token or http status 403 if email or password not found.")
+            description = "Gets a JSON object  with email and password. The response is jwt token or http status 401 if email not found.")
     @ApiResponses({
             @ApiResponse(responseCode = "200", content = { @Content(schema = @Schema(implementation = AuthenticationResponse.class), mediaType = "application/json") }),
-            @ApiResponse(responseCode = "403", content = { @Content(schema = @Schema())
+            @ApiResponse(responseCode = "401", content = { @Content(schema = @Schema())
             })
     })
     @PostMapping("/authenticate")
     public ResponseEntity<AuthenticationResponse> authenticate(@RequestBody AuthenticationRequest request){
-        return ResponseEntity.ok(service.authenticate(request));
+        if(usersRepository.findByEmail(request.getEmail()).isPresent()){
+            return ResponseEntity.ok(service.authenticate(request));
+        }
+        return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
     }
 }
