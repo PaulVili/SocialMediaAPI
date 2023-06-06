@@ -33,17 +33,24 @@ public class UsersPostController {
     private UsersRepository usersRepository;
     @Operation(
             summary = "Retrieve last posts for id",
-            description = "Get a Posts object by specifying its id. The response is Posts object with id, userId, postHeader, postText, postImage, createdAt, updatedAt, usersByUserId.")
+            description = "Get a Posts object by specifying its id. The response is Posts object with id, userId, postHeader, postText, postImage, createdAt, updatedAt, usersByUserId and http status 200 or 404 if userId not found.")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", content = { @Content(schema = @Schema(implementation = UserPostsModel.class), mediaType = "application/json") }),
+            @ApiResponse(responseCode = "404", content = { @Content(schema = @Schema()) })
+    })
     @GetMapping("lastPosts/{userId}")
-    public List<UserPostsModel> getLastPosts(@PathVariable int userId){
+    public ResponseEntity<List<UserPostsModel>> getLastPosts(@PathVariable int userId){
         List<Integer> findAllByUserId = userFollowerRepository.findTargetIdBySourceId(userId);
-        return usersPostRepository.getUserPostsByUserIdAndSorted(findAllByUserId);
+        if(findAllByUserId == null){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return ResponseEntity.ok(usersPostRepository.getUserPostsByUserIdAndSorted(findAllByUserId));
     }
     @Operation(
             summary = "Create new post",
             description = "Gets a JSON object with user id and content of post. The response is http status 201 or 404 if user id not found.")
     @ApiResponses({
-            @ApiResponse(responseCode = "201", content = { @Content(schema = @Schema(implementation = AuthenticationResponse.class), mediaType = "application/json") }),
+            @ApiResponse(responseCode = "201", content = { @Content(schema = @Schema(implementation = UserPostsModel.class), mediaType = "application/json") }),
             @ApiResponse(responseCode = "404", content = { @Content(schema = @Schema()) })
     })
     @PostMapping("create")
