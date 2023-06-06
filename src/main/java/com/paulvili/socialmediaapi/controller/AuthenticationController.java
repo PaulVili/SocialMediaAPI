@@ -41,7 +41,7 @@ public class AuthenticationController {
             summary = "Registration",
             description = "Gets a JSON object with username, email and password. The response is jwt token or http status 400 if email is invalid.")
     @ApiResponses({
-            @ApiResponse(responseCode = "200", content = { @Content(schema = @Schema(implementation = AuthenticationResponse.class), mediaType = "application/json") }),
+            @ApiResponse(responseCode = "201", content = { @Content(schema = @Schema(implementation = AuthenticationResponse.class), mediaType = "application/json") }),
             @ApiResponse(responseCode = "400", content = { @Content(schema = @Schema()) })
     })
     @PostMapping("/register")
@@ -50,7 +50,7 @@ public class AuthenticationController {
         if (!isEmailValid(request.getEmail()) || findEmail.isPresent()){
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
-        return ResponseEntity.ok(service.register(request));
+        return new ResponseEntity<>(service.register(request), HttpStatus.CREATED);
     }
     @Operation(
             summary = "Authentication",

@@ -30,7 +30,7 @@ public class UserPostsModel {
     private Date createdAt;
     @Basic
     @Column(name = "updated_at")
-    private Integer updatedAt;
+    private Date updatedAt;
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false, insertable=false, updatable=false)
     private UsersModel usersByUserId;

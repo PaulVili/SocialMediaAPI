@@ -83,7 +83,7 @@ public class UsersPostController {
         updatePost.setPostHeader(usersPost.getPostHeader());
         updatePost.setPostText(usersPost.getPostText());
         updatePost.setPostImage(usersPost.getPostImage());
-        updatePost.setUpdatedAt(usersPost.getUpdatedAt());
+        updatePost.setUpdatedAt(Date.valueOf(LocalDate.now()));
 
         usersPostRepository.save(updatePost);
         return ResponseEntity.ok(updatePost);

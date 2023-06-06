@@ -22,7 +22,7 @@ public class AuthenticationService {
     @Autowired
     private UsersRepository repository;
     @Autowired
-    private PasswordEncoder passwordEncoder;
+    public PasswordEncoder passwordEncoder;
     @Autowired
     private JwtService jwtService;
     @Autowired
