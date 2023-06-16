@@ -12,20 +12,19 @@ public class UserMessageModel {
     @Column(name = "id")
     private int id;
 
-    @Basic
     @Column(name = "source_id")
     private int sourceId;
-    @Basic
+
     @Column(name = "target_id")
     private int targetId;
 
-    @Basic
     @Column(name = "message")
     private String message;
 
     @ManyToOne
     @JoinColumn(name = "source_id", referencedColumnName = "id", nullable = false, insertable=false, updatable=false)
     private UsersModel usersBySourceId;
+
     @ManyToOne
     @JoinColumn(name = "target_id", referencedColumnName = "id", nullable = false, insertable=false, updatable=false)
     private UsersModel usersByTargetId;

@@ -24,28 +24,22 @@ public class UsersModel implements UserDetails {
     @Column(name = "id")
     private int id;
 
-    @Basic
     @Column(name = "user_name")
     private String userName;
 
-    @Basic
     @Column(name = "email")
     private String email;
 
-    @Basic
     @Column(name = "password")
     private String password;
 
-    @Basic
     @Enumerated(EnumType.STRING)
     @Column(name = "role")
     private Role role;
 
-    @Basic
     @Column(name = "registered_at")
     private Date registeredAt;
 
-    @Basic
     @Column(name = "last_login")
     private Date lastLogin;
 

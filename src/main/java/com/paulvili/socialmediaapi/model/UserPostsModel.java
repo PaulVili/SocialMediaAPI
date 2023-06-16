@@ -13,24 +13,25 @@ public class UserPostsModel {
     @Id
     @Column(name = "id")
     private int id;
-    @Basic
+
     @Column(name = "user_id")
     private int userId;
-    @Basic
+
     @Column(name = "post_header")
     private String postHeader;
-    @Basic
+
     @Column(name = "post_text")
     private String postText;
-    @Basic
+
     @Column(name = "post_image")
     private String postImage;
-    @Basic
+
     @Column(name = "created_at")
     private Date createdAt;
-    @Basic
+
     @Column(name = "updated_at")
     private Date updatedAt;
+
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false, insertable=false, updatable=false)
     private UsersModel usersByUserId;
